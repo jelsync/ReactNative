@@ -5,8 +5,8 @@ import Cita from './components/cita';
 const App = () => {
   const [citas, setCitas] = useState([
     { id: '1', paciente: 'Jelsyn', sintomas: 'No come' },
-    { id: '2', paciente: 'Jelsyn2', sintomas: 'No come2' },
-    { id: '3', paciente: 'Jelsyn3', sintomas: 'No come3' }
+    { id: '2', paciente: 'jose', sintomas: 'No come2' },
+    { id: '3', paciente: 'Pedro', sintomas: 'No come3' }
   ]);
 
   return (
