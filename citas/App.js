@@ -1,10 +1,6 @@
 import React, { useState } from 'react';
-import {
-  StyleSheet,
-  Text,
-  View,
-  FlatList
-} from 'react-native';
+import { StyleSheet, Text, View, FlatList } from 'react-native';
+import Cita from './components/cita';
 
 const App = () => {
   const [citas, setCitas] = useState([
@@ -13,18 +9,12 @@ const App = () => {
     { id: '3', paciente: 'Jelsyn3', sintomas: 'No come3' }
   ]);
 
-
   return (
     <View style={styles.contenedor}>
       <Text style={styles.titulo}>Administrador de Citas</Text>
       <FlatList
         data={citas}
-        renderItem={({ item }) => (
-          <View>
-            {/* <Text>{item.id}</Text> */}
-            <Text>{item.paciente}</Text>
-          </View>
-        )}
+        renderItem={({ item }) => <Cita item={item} />}
         keyExtractor={cita => cita.id}
       />
     </View>
