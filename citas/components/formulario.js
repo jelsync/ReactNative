@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TextInput, Button } from 'react-native';
+import { StyleSheet, Text, View, TextInput, Button, TouchableHighlight, Alert, ScrollView } from 'react-native';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 
 const Formulario = () => {
@@ -8,6 +8,11 @@ const Formulario = () => {
 
     const [fecha, setFecha] = useState('');
     const [hora, setHora] = useState('');
+    const [paciente, setPaciente] = useState('');
+    const [sintomas, setSintomas] = useState('');
+    const [telefono, setTelefono] = useState('');
+    // const [hora, setHora] = useState('');
+
 
     const showDatePicker = () => {
         setDatePickerVisibility(true);
@@ -37,30 +42,45 @@ const Formulario = () => {
         hideTimePicker();
     };
 
+    const crearCita = () => {
+        if (paciente.trim() == '' ||
+            telefono.trim() == '' ||
+            sintomas.trim() == '' ||
+            fecha.trim() == '' ||
+            hora.trim() == '') {
+                monstrarAlert();
+                return true;
+        }
+        return false;
+    }
+    
+    const monstrarAlert = () => {
+        Alert.alert(
+            'Error',
+            'Todos los campos son obligatorios',
+            [{
+                text:'OK'
+            }]
+        )
+    }
+    
+
+
     return (
         <>
-            <View style={styles.formulario}>
+            <ScrollView style={styles.formulario}>
                 <View>
                     <Text style={styles.label}>Paciente:</Text>
                     <TextInput
                         style={styles.input}
-                        onChangeText={(texto) => console.log(texto)}
+                        onChangeText={(texto) => setPaciente(texto)}
                     />
                 </View>
                 <View>
                     <Text style={styles.label}>Telfono:</Text>
                     <TextInput
                         style={styles.input}
-                        onChangeText={(texto) => console.log(texto)}
-                        keyboardType='number-pad'
-                    />
-                </View>
-                <View>
-                    <Text style={styles.label}>Sintomas:</Text>
-                    <TextInput
-                        multiline
-                        style={styles.input}
-                        onChangeText={(texto) => console.log(texto)}
+                        onChangeText={(texto) => setTelefono(texto)}
                         keyboardType='number-pad'
                     />
                 </View>
@@ -88,7 +108,20 @@ const Formulario = () => {
                     />
                     <Text>{hora}</Text>
                 </View>
-            </View>
+                <View>
+                    <Text style={styles.label}>Sintomas:</Text>
+                    <TextInput
+                        multiline
+                        style={styles.input}
+                        onChangeText={(texto) => setSintomas(texto)}
+                    />
+                </View>
+                <View>
+                    <TouchableHighlight onPress={() => crearCita()} style={styles.btnCrear}>
+                        <Text style={styles.textoCrear}>Crear Citas</Text>
+                    </TouchableHighlight>
+                </View>
+            </ScrollView>
         </>
     )
 }
@@ -114,4 +147,15 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderStyle: 'solid'
     },
+    btnCrear: {
+        padding: 10,
+        backgroundColor: '#AA076B',
+        marginVertical: 10,
+        textAlign: 'center'
+    },
+    textoCrear: {
+        color: '#FFF',
+        fontWeight: 'bold',
+        textAlign: 'center'
+    }
 })
