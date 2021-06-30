@@ -6,15 +6,23 @@ const App = () => {
   const [citas, setCitas] = useState([
     { id: '1', paciente: 'Jelsyn', sintomas: 'No come' },
     { id: '2', paciente: 'jose', sintomas: 'No come2' },
-    { id: '3', paciente: 'Pedro', sintomas: 'No come3' }
+    { id: '3', paciente: 'jose', sintomas: 'No come2' },
+    { id: '4', paciente: 'Puto', sintomas: 'Bryan se la come' }
   ]);
+
+  const eliminarPaciente = (id) => {
+    setCitas((nuevasCitas) => {
+      return nuevasCitas.filter(cita => cita.id !== id);
+    });
+  }
+
 
   return (
     <View style={styles.contenedor}>
       <Text style={styles.titulo}>Administrador de Citas</Text>
       <FlatList
         data={citas}
-        renderItem={({ item }) => <Cita item={item} />}
+        renderItem={({ item }) => <Cita item={item} eliminarPaciente={eliminarPaciente} />}
         keyExtractor={cita => cita.id}
       />
     </View>
