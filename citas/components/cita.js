@@ -6,7 +6,6 @@ const Cita = ({ item, eliminarPaciente }) => {
     const dialogoEliminar = (id) => {
         eliminarPaciente(id); 
     }
-    
 
     return (
         <View style={styles.contenedor}>
