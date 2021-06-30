@@ -4,7 +4,7 @@ import { View, Text, StyleSheet, TouchableHighlight } from 'react-native'
 const Cita = ({ item, eliminarPaciente }) => {
 
     const dialogoEliminar = (id) => {
-        eliminarPaciente(id); 
+        eliminarPaciente(id);
     }
 
     return (
@@ -13,12 +13,24 @@ const Cita = ({ item, eliminarPaciente }) => {
                 <Text style={styles.label}>Paciente: </Text>
                 <Text style={styles.texto} >{item.paciente}</Text>
             </View>
+            <View>
+                <Text style={styles.label}>Telefono: </Text>
+                <Text style={styles.texto} >{item.telefono}</Text>
+            </View>
+            <View>
+                <Text style={styles.label}>Fecha: </Text>
+                <Text style={styles.texto} >{item.fecha}</Text>
+            </View>
+            <View>
+                <Text style={styles.label}>Hora: </Text>
+                <Text style={styles.texto} >{item.hora}</Text>
+            </View>
             <View >
                 <Text style={styles.label}>Sintoma: </Text>
                 <Text style={styles.texto} >{item.sintomas}</Text>
             </View>
             <View>
-                <TouchableHighlight onPress={()=>dialogoEliminar(item.id)} style={styles.btnEliminar}>
+                <TouchableHighlight onPress={() => dialogoEliminar(item.id)} style={styles.btnEliminar}>
                     <Text style={styles.textoEliminar}>Eliminar &times;</Text>
                 </TouchableHighlight>
             </View>

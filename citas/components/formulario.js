@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, Button, TouchableHighlight, Alert, ScrollView } from 'react-native';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
+import shortid from 'shortid';
+// import Cita from './cita';
 
-const Formulario = () => {
+const Formulario = ({ citas, setCitas, setMostrarForm }) => {
     const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
     const [isTimePickerVisible, setTimePickerVisibility] = useState(false);
 
@@ -12,7 +14,6 @@ const Formulario = () => {
     const [sintomas, setSintomas] = useState('');
     const [telefono, setTelefono] = useState('');
     // const [hora, setHora] = useState('');
-
 
     const showDatePicker = () => {
         setDatePickerVisibility(true);
@@ -37,8 +38,8 @@ const Formulario = () => {
     };
 
     const confirmarHora = (time) => {
-        const opciones = { hour: 'numeric', minute: '2-digit' }
-        setHora(time.toLocaleString('es-US', opciones));
+        const opciones = { hour: 'numeric', minute: '2-digit' };
+        setHora(time.toLocaleString('en-US', opciones));
         hideTimePicker();
     };
 
@@ -48,23 +49,29 @@ const Formulario = () => {
             sintomas.trim() == '' ||
             fecha.trim() == '' ||
             hora.trim() == '') {
-                monstrarAlert();
-                return true;
+            monstrarAlert();
+            return;
         }
-        return false;
+
+        const cita = { paciente, telefono, sintomas, fecha, hora };
+        cita.id = shortid.generate();
+        const citaNueva = [...citas, cita];
+        console.log(citaNueva);
+        setCitas(citaNueva);
+
+        setMostrarForm(false);
+        // setCita(cita); 
     }
-    
+
     const monstrarAlert = () => {
         Alert.alert(
             'Error',
             'Todos los campos son obligatorios',
             [{
-                text:'OK'
+                text: 'OK'
             }]
         )
     }
-    
-
 
     return (
         <>
