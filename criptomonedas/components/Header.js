@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
         textTransform: 'uppercase',
         fontSize: 20,
         color: '#FFF',
-        // marginBottom: 30
+        marginBottom: 30
     },
     imagen: {
         width: '100%',
