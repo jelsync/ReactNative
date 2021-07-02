@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, TouchableHighlight, Alert } from 'react-native';
-import { Picker } from '@react-native-picker/picker';
 import axios from 'axios';
+import { Picker } from '@react-native-picker/picker';
+import Cotizacion from "./Cotizacion";
 
-const Formulario = ({ criptomoneda, setCriptomoneda, moneda, setMoneda, setApi}) => {
-   
+const Formulario = () => {
+
+    const [criptomoneda, setCriptomoneda] = useState('');
+    const [api, setApi] = useState(false);
+    const [moneda, setMoneda] = useState('');
     const [criptomonedas, setCriptomonedas] = useState([]);
 
     useEffect(() => {
@@ -35,40 +39,50 @@ const Formulario = ({ criptomoneda, setCriptomoneda, moneda, setMoneda, setApi})
     }
 
     return (
-        <View style={styles.contenido}>
-            <Text style={styles.label}>Monenda</Text>
-            <Picker
-                selectedValue={moneda}
-                onValueChange={(itemValue) =>
-                    setMoneda(itemValue)}
-            >
-                <Picker.Item label="- Seleccione -" value="" />
-                <Picker.Item label="Dolar" value="USD" />
-                <Picker.Item label="Euro" value="EUR" />
+        <>
+            <View style={styles.contenido}>
+                <Text style={styles.label}>Monenda</Text>
+                <Picker
+                    selectedValue={moneda}
+                    onValueChange={(itemValue) =>
+                        setMoneda(itemValue)}
+                >
+                    <Picker.Item label="- Seleccione -" value="" />
+                    <Picker.Item label="Dolar" value="USD" />
+                    <Picker.Item label="Euro" value="EUR" />
+                </Picker>
 
-            </Picker>
+                <Text style={styles.label}>Criptomenda</Text>
+                <Picker
+                    selectedValue={criptomoneda}
+                    onValueChange={(itemValue) =>
+                        setCriptomoneda(itemValue)}
+                >
+                    <Picker.Item label="- Seleccione -" value="" />
+                    {
+                        criptomonedas && criptomonedas.map(cript => (
+                            <Picker.Item key={cript.CoinInfo.Id} label={cript.CoinInfo.FullName} value={cript.CoinInfo.Name} />
+                        ))
+                    }
+                </Picker>
+                <TouchableHighlight
+                    style={styles.btnCotiazr}
+                    onPress={() => cotizarMoneda()}
+                >
+                    <Text style={styles.textoCotizar}>Cotizar</Text>
+                </TouchableHighlight>
 
-            <Text style={styles.label}>Criptomenda</Text>
-            <Picker
-                selectedValue={criptomoneda}
-                onValueChange={(itemValue) =>
-                    setCriptomoneda(itemValue)}
-            >
-                <Picker.Item label="- Seleccione -" value="" />
-                {
-                    criptomonedas && criptomonedas.map(cript => (
-                        <Picker.Item key={cript.CoinInfo.Id} label={cript.CoinInfo.FullName} value={cript.CoinInfo.Name} />
-                    ))
-                }
-            </Picker>
-            <TouchableHighlight
-                style={styles.btnCotiazr}
-                onPress={() => cotizarMoneda()}
-            >
-                <Text style={styles.textoCotizar}>Cotizar</Text>
+                <Cotizacion
+                    criptomoneda={criptomoneda}
+                    setCriptomoneda={setCriptomoneda}
+                    moneda={moneda}
+                    setMoneda={setMoneda}
+                    setApi={setApi}
+                    api={api}
+                />
+            </View>
+        </>
 
-            </TouchableHighlight>
-        </View>
     )
 }
 
