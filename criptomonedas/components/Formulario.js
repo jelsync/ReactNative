@@ -10,6 +10,7 @@ const Formulario = () => {
     const [api, setApi] = useState(false);
     const [moneda, setMoneda] = useState('');
     const [criptomonedas, setCriptomonedas] = useState([]);
+    const [cargando, setCargando] = useState(false);
 
     useEffect(() => {
         const obtenerMonedas = async () => {
@@ -71,14 +72,13 @@ const Formulario = () => {
                 >
                     <Text style={styles.textoCotizar}>Cotizar</Text>
                 </TouchableHighlight>
-
                 <Cotizacion
                     criptomoneda={criptomoneda}
-                    setCriptomoneda={setCriptomoneda}
                     moneda={moneda}
-                    setMoneda={setMoneda}
                     setApi={setApi}
                     api={api}
+                    setCargando={setCargando}
+                    cargando={cargando}
                 />
             </View>
         </>

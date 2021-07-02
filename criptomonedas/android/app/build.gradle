@@ -131,7 +131,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.criptomonedas"
+        applicationId "com.criptomonedas.app"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

@@ -1,4 +1,4 @@
-package com.criptomonedas;
+package com.criptomonedas.app;
 
 import com.facebook.react.ReactActivity;
 
