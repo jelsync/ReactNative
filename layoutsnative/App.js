@@ -11,7 +11,6 @@ const App = () => {
             source={require('./assets/img/bg.jpg')}
           />
         </View>
-
         <View style={styles.contenedor}>
           <Text style={styles.titulo}>Qué hacer en Paris</Text>
           <ScrollView
