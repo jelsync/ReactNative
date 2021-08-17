@@ -11,8 +11,10 @@
   },
   "dependencies": {
     "@react-native-picker/picker": "^1.16.3",
+    "cocoapods": "^0.0.0",
     "react": "17.0.1",
-    "react-native": "0.64.2"
+    "react-native": "0.64.2",
+    "react-native-fbsdk": "^3.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",

@@ -2,9 +2,14 @@ import React, { useState, useEffect } from 'react';
 import {  StyleSheet, View, Keyboard, TouchableWithoutFeedback, Alert } from 'react-native';
 import Formulario from './components/Formulario';
 import Clima from './components/Clima';
+import { Settings } from 'react-native-fbsdk-next';
+
+// Ask for consent first if necessary
+// Possibly only do this for iOS if no need to handle a GDPR-type flow
 
 
 const App  = () => {
+  Settings.initializeSDK();
 
   const [ busqueda, guardarBusqueda ] = useState({
     ciudad: '',
